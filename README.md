@@ -7,3 +7,5 @@ Code description -
 - Encoder only transformer model is used, the core implementation taken from NVIDIA-fastpitch
 - self supervised features are extracted using s3prl toolkit
 - Correlation coefficient is computed to evaluate the models
+
+For any queries, contact sathvikudupa66@gmail.com
