@@ -1,0 +1,90 @@
+
+
+data:
+   rootPath: /data/Database/SpireEMA    
+   emaFolder: Neutral/EmaClean
+   wavFolder: Neutral/WavClean
+   mfccFolder: python_mfccs_v3_n13
+   alignFolder: Neutral/ForceAlign/
+   phonFile: /data/Database/SpireEMA/PhoneSetV2.npz
+   startStopFolder: /data/Database/SpireEMA/StartStopMat
+   subjects: '10'
+   path: data/preCompute/subjectPrecomputed
+   dumpdir: 'tmp'
+   testMode: seen
+   nMFCC: 13
+   sampleRate: 22050
+   nfft: 1024
+   hopLength: 256
+   filterLength: 1024
+   winLength: 1024
+   nMels: 80
+   fMin: 0.0
+   fMax: 8000.0
+   normalizeMel: True
+   numTestSubs: 0.0
+   phonPadMax: 60
+   emaPadMax: 400
+   phonPadValue: 0
+   emaPadValue: 0
+   store: False
+   load: True
+   normEma: True
+   normMFCC: True
+   phoneSequence: False
+   removeSil: True
+   tphnReduce: True
+   stdFrac: 0.25
+   num_proc: 28
+  
+
+common:
+  sub: 'AshwinHebbar'     #change subject if data.subjets == 10 and common.pooled == false
+  dump_loc: /data/Database/SpireEMA/pretrained_feats  #SSL feats
+  dump_feats: false  #set it to true to extract feats from pretrained SSL checkpoints from s3prl
+  use_feats: true #if false, uses default MFCC
+  feats: decoar  #audio_albert, pase_plus, tera, mockingjay, vq_wav2vec, wav2vec, 'apc', 'npc', decoar    #specify SSL feat
+  infer: true
+  datasetName: SpireEmaEnglish
+  numEpochs: 101
+  device: 'cuda:0'
+  batch_size: 16  
+  model: fastspeech
+  expmode: aai 
+  finetune: false    #whether to finetune on pooled model with a subject
+  finetune_chk: 
+  sub_embed: False
+  num_speakers: 38
+  pooled: true
+  upload_freq: 1
+  break_mode: false
+  model_size: default
+  dump_cc: results
+  stat_test: true
+  
+
+baseline: true
+loss_type: crossentropy #ctc, crossentropy
+loss_loc: end  #mid, end, both
+phon_weight: 1
+
+optimizer:
+  name: adam
+  lr: 1e-4
+  weightdecay: 1e-6
+
+earlystopper:
+  patience: 10
+  freq: 50
+  verbose: True
+  minRun: 0
+  delta: 0
+  checkpoint_tag: ''
+  reuse: True
+
+logging:
+  project_name: ''    #wandb project name
+  notes:
+  tags:
+  run_name: testset
+  disable: true
